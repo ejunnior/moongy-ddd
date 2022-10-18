@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\10c.png" />
+    <None Remove="Images\1c.png" />
+    <None Remove="Images\1d.png" />
+    <None Remove="Images\20d.png" />
+    <None Remove="Images\25c.png" />
+    <None Remove="Images\5d.png" />
+    <None Remove="Images\Chocolate.png" />
+    <None Remove="Images\Gum.png" />
+    <None Remove="Images\Icon.png" />
+    <None Remove="Images\Soda.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Util\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\service\src\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\10c.png" />
+    <Resource Include="Images\1c.png" />
+    <Resource Include="Images\1d.png" />
+    <Resource Include="Images\20d.png" />
+    <Resource Include="Images\25c.png" />
+    <Resource Include="Images\5d.png" />
+    <Resource Include="Images\Chocolate.png" />
+    <Resource Include="Images\Gum.png" />
+    <Resource Include="Images\Icon.png" />
+    <Resource Include="Images\Soda.png" />
+  </ItemGroup>
+
+</Project>
