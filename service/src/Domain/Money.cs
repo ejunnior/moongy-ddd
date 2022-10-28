@@ -31,12 +31,31 @@ public class Money : ValueObject<Money>
         TwentyEuroCount += twentyEuroCount;
     }
 
-    public int FiveEuroCount { get; private set; }
-    public int OneCentCount { get; private set; }
-    public int OneEuroCount { get; private set; }
-    public int QuarterCount { get; private set; }
-    public int TenCentCount { get; private set; }
-    public int TwentyEuroCount { get; private set; }
+    public decimal Amount =>
+        OneCentCount * 0.01m +
+        TenCentCount * 0.10m +
+        QuarterCount * 0.25m +
+        OneEuroCount +
+        FiveEuroCount * 5 +
+        TwentyEuroCount * 20;
+
+    public int FiveEuroCount { get; }
+    public int OneCentCount { get; }
+    public int OneEuroCount { get; }
+    public int QuarterCount { get; }
+    public int TenCentCount { get; }
+    public int TwentyEuroCount { get; }
+
+    public static Money operator -(Money money1, Money money2)
+    {
+        return new Money(
+            oneCentCount: money1.OneCentCount - money2.OneCentCount,
+            tenCentCount: money1.TenCentCount - money2.TenCentCount,
+            quarterCount: money1.QuarterCount - money2.QuarterCount,
+            oneEuroCount: money1.OneEuroCount - money2.OneEuroCount,
+            fiveEuroCount: money1.FiveEuroCount - money2.FiveEuroCount,
+            twentyEuroCount: money1.TwentyEuroCount - money2.TwentyEuroCount);
+    }
 
     public static Money operator +(Money money1, Money money2)
     {
