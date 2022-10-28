@@ -10,6 +10,19 @@ public class Money : ValueObject<Money>
         int fiveEuroCount,
         int twentyEuroCount)
     {
+        if (oneCentCount < 0)
+            throw new InvalidOperationException();
+        if (tenCentCount < 0)
+            throw new InvalidOperationException();
+        if (quarterCount < 0)
+            throw new InvalidOperationException();
+        if (oneEuroCount < 0)
+            throw new InvalidOperationException();
+        if (fiveEuroCount < 0)
+            throw new InvalidOperationException();
+        if (twentyEuroCount < 0)
+            throw new InvalidOperationException();
+
         OneCentCount += oneCentCount;
         TenCentCount += tenCentCount;
         QuarterCount += quarterCount;
