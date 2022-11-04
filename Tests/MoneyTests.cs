@@ -213,6 +213,34 @@
                 .Be(12);
         }
 
+        [Theory]
+        [InlineData(1, 0, 0, 0, 0, 0, "¢1")]
+        [InlineData(0, 0, 0, 1, 0, 0, "€1,00")]
+        [InlineData(1, 0, 0, 1, 0, 0, "€1,01")]
+        [InlineData(0, 0, 2, 1, 0, 0, "€1,50")]
+        public void To_string_should_return_amount_of_money(
+            int oneCentCount,
+            int tenCentCount,
+            int quarterCount,
+            int oneEuroCount,
+            int fiveEuroCount,
+            int twentyEuroCount,
+            string expectedString)
+        {
+            var money = new Money(
+                oneCentCount: oneCentCount,
+                tenCentCount: tenCentCount,
+                quarterCount: quarterCount,
+                oneEuroCount: oneEuroCount,
+                fiveEuroCount: fiveEuroCount,
+                twentyEuroCount: twentyEuroCount);
+
+            money
+                .ToString()
+                .Should()
+                .Be(expectedString);
+        }
+
         [Fact]
         public void Two_money_instances_do_not_equal_if_contain_different_money_amount()
         {

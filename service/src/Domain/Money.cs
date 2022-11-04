@@ -76,6 +76,14 @@ public class Money : ValueObject<Money>
             twentyEuroCount: money1.TwentyEuroCount + money2.TwentyEuroCount);
     }
 
+    public override string ToString()
+    {
+        if (Amount < 1)
+            return "¢" + (Amount * 100).ToString("0");
+
+        return "€" + Amount.ToString("0.00");
+    }
+
     protected override bool EqualsCore(Money other)
     {
         return
