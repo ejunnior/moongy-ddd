@@ -100,7 +100,7 @@
             // Assert
             action
                 .Should()
-                .Throw<ArgumentException>();
+                .Throw<InvalidOperationException>();
         }
 
         [Fact]
