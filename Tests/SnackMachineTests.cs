@@ -39,13 +39,39 @@ public class SnackMachineTests
     }
 
     [Fact]
+    public void Money_in_transaction_goes_to_inside_after_purchase()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        snackMachine.InsertMoney(Money.Euro);
+        snackMachine.InsertMoney(Money.Euro);
+
+        // Act
+        snackMachine
+            .BuySnack();
+
+        // Assert
+        snackMachine
+            .MoneyInTransaction
+            .Should()
+            .Be(Money.None);
+
+        snackMachine
+            .MoneyInside
+            .Amount
+            .Should()
+            .Be(2m);
+    }
+
+    [Fact]
     public void Return_Money_Empties_Money_In_Transaction()
     {
         // Arrange
         var snackMachine = new SnackMachine();
 
         snackMachine
-            .InsertMoney(Money.None);
+            .InsertMoney(Money.Cent);
 
         // Act
         snackMachine
