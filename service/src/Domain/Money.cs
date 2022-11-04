@@ -2,6 +2,14 @@
 
 public class Money : ValueObject<Money>
 {
+    public static readonly Money Cent = new Money(1, 0, 0, 0, 0, 0);
+    public static readonly Money Euro = new Money(0, 0, 0, 1, 0, 0);
+    public static readonly Money FiveEuro = new Money(0, 0, 0, 0, 1, 0);
+    public static readonly Money None = new Money(0, 0, 0, 0, 0, 0);
+    public static readonly Money Quarter = new Money(0, 0, 1, 0, 0, 0);
+    public static readonly Money TenCent = new Money(0, 1, 0, 0, 0, 0);
+    public static readonly Money TwentyEuro = new Money(0, 0, 0, 0, 0, 1);
+
     public Money(
         int oneCentCount,
         int tenCentCount,
