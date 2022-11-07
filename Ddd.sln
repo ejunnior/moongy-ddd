@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "service\src\Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "client\src\UI.csproj", "{6C8C5534-7AA2-40FE-9726-AABEF4E8D5B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B0A9BA19-A8C6-4BB2-80FC-37BE41D1E6FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{B0A9BA19-A8C6-4BB2-80FC-37BE41D1E6FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9EF59CE4-BF24-495B-81E3-C2CD742C9B65}"
+	ProjectSection(SolutionItems) = preProject
+		DbCreation.txt = DbCreation.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
