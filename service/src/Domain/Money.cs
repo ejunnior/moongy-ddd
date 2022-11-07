@@ -39,6 +39,10 @@ public class Money : ValueObject<Money>
         TwentyEuroCount += twentyEuroCount;
     }
 
+    private Money()
+    {
+    }
+
     public decimal Amount =>
         OneCentCount * 0.01m +
         TenCentCount * 0.10m +
