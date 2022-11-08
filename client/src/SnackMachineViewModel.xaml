@@ -31,7 +31,7 @@
                                     <Label Content="{Binding Path=Price}" FontSize="20" FontWeight="Bold" />
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Label Content="{Binding Path=Amount}" FontSize="18" FontWeight="Bold" Margin="0" Padding="0" />
-                                        <Label Content="left" Margin="3 6 0 0" Padding="0"/>
+                                        <Label Content="left" Margin="3 6 0 0" Padding="0" />
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -55,22 +55,22 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Content="Buy a Snack" FontSize="18" Padding="10" Margin="10" Command="{Binding BuySnackCommand}"/>
+                <Button Grid.Column="0" Grid.Row="0" Content="Buy a Snack" FontSize="18" Padding="10" Margin="10" Command="{Binding BuySnackCommand}" />
 
                 <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Content="Money inserted:" FontSize="18" />
                     <Label Content="{Binding MoneyInTransaction}" FontSize="18" FontWeight="Bold" />
                 </StackPanel>
 
-                <Button Grid.Column="0" Grid.Row="2" Content="Put ¢1" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertCentCommand}"/>
-                <Button Grid.Column="1" Grid.Row="2" Content="Put ¢10" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertTenCentCommand}"/>
-                <Button Grid.Column="2" Grid.Row="2" Content="Put ¢25" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertQuarterCommand}"/>
+                <Button Grid.Column="0" Grid.Row="2" Content="Put ¢1" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertCentCommand}" />
+                <Button Grid.Column="1" Grid.Row="2" Content="Put ¢10" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertTenCentCommand}" />
+                <Button Grid.Column="2" Grid.Row="2" Content="Put ¢25" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertQuarterCommand}" />
 
                 <Button Grid.Column="0" Grid.Row="3" Content="Put €1" FontSize="18" Padding="10" Margin="10" Command="{Binding InsertEuroCommand}" />
-                <Button Grid.Column="1" Grid.Row="3" Content="Put €5" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertFiveEuroCommand}"/>
-                <Button Grid.Column="2" Grid.Row="3" Content="Put €20" FontSize="18" Padding="10" Margin="10" Command="{Binding InsertTwentyEuroCommand}"/>
+                <Button Grid.Column="1" Grid.Row="3" Content="Put €5" FontSize="18" Padding="10" Margin="10"  Command="{Binding InsertFiveEuroCommand}" />
+                <Button Grid.Column="2" Grid.Row="3" Content="Put €20" FontSize="18" Padding="10" Margin="10" Command="{Binding InsertTwentyEuroCommand}" />
 
-                <Button Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="4" Content="Return money" FontSize="18" Padding="10" Margin="10" Command="{Binding ReturnMoneyCommand}"/>
+                <Button Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="4" Content="Return money" FontSize="18" Padding="10" Margin="10" Command="{Binding ReturnMoneyCommand}" />
 
                 <Label Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="5" Content="{Binding Message}"  HorizontalAlignment="Center" FontSize="16" />
             </Grid>
@@ -92,17 +92,15 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                     <Image Source="{StaticResource img1Dollar}" Width="100" />
-                    <Label Content="{Binding MoneyInside.OneDollarCount}" FontSize="20" FontWeight="Bold" Margin="10 3 30 0" />
+                    <Label Content="{Binding MoneyInside.OneEuroCount}" FontSize="20" FontWeight="Bold" Margin="10 3 30 0" />
 
                     <Image Source="{StaticResource img5Dollar}" Width="100" />
-                    <Label Content="{Binding MoneyInside.FiveDollarCount}" FontSize="20" FontWeight="Bold" Margin="10 3 30 0" />
+                    <Label Content="{Binding MoneyInside.FiveEuroCount}" FontSize="20" FontWeight="Bold" Margin="10 3 30 0" />
 
                     <Image Source="{StaticResource img20Dollar}" Width="100" />
-                    <Label Content="{Binding MoneyInside.TwentyDollarCount}" FontSize="20" FontWeight="Bold" Margin="10 3 30 0" />
+                    <Label Content="{Binding MoneyInside.TwentyEuroCount}" FontSize="20" FontWeight="Bold" Margin="10 3 30 0" />
                 </StackPanel>
             </StackPanel>
-
         </Grid>
     </DataTemplate>
-
 </ResourceDictionary>
