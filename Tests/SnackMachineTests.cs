@@ -1,11 +1,50 @@
 ﻿namespace Tests;
 
+using System.ComponentModel.DataAnnotations;
 using Domain;
 using FluentAssertions;
 using Xunit;
 
 public class SnackMachineTests
 {
+    [Fact]
+    public void Buysnack_trades_inserted_money_for_a_snack()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        snackMachine.LoadSnacks(
+            position: 1,
+            snack: new Snack("Some Snack"),
+            quantity: 10,
+            price: 1m);
+
+        snackMachine.InsertMoney(Money.Euro);
+
+        // Act
+        snackMachine
+            .BuySnack(1);
+
+        // Assert
+        snackMachine
+            .MoneyInTransaction
+            .Should()
+            .Be(Money.None);
+
+        snackMachine
+            .MoneyInside
+            .Amount
+            .Should()
+            .Be(1m);
+
+        snackMachine
+            .Slots
+            .Single(x => x.Position == 1)
+            .Quantity
+            .Should()
+            .Be(9);
+    }
+
     [Fact]
     public void Cannot_insert_more_than_one_coin_or_note_at_a_time()
     {
@@ -36,32 +75,6 @@ public class SnackMachineTests
             .Amount
             .Should()
             .Be(1.01m);
-    }
-
-    [Fact]
-    public void Money_in_transaction_goes_to_inside_after_purchase()
-    {
-        // Arrange
-        var snackMachine = new SnackMachine();
-
-        snackMachine.InsertMoney(Money.Euro);
-        snackMachine.InsertMoney(Money.Euro);
-
-        // Act
-        snackMachine
-            .BuySnack();
-
-        // Assert
-        snackMachine
-            .MoneyInTransaction
-            .Should()
-            .Be(Money.None);
-
-        snackMachine
-            .MoneyInside
-            .Amount
-            .Should()
-            .Be(2m);
     }
 
     [Fact]

@@ -55,7 +55,13 @@ public class SnackMachineViewModel : ViewModel
 
     public void BuySnack()
     {
-        _snackMachine.BuySnack();
+        _snackMachine.BuySnack(1);
+        using (var session = SessionFactory.OpenSession())
+        using (var transaction = session.BeginTransaction())
+        {
+            session.SaveOrUpdate(_snackMachine);
+            transaction.Commit();
+        }
         NotifyClient("You have bought a snack");
     }
 
