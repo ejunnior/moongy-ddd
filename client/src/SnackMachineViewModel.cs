@@ -1,10 +1,14 @@
 ﻿namespace UI;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Domain;
 
 public class SnackMachineViewModel : ViewModel
 {
+    private readonly SnackMachineRepository _repository;
     private readonly SnackMachine _snackMachine;
 
     private string _menssage = string.Empty;
@@ -12,6 +16,7 @@ public class SnackMachineViewModel : ViewModel
     public SnackMachineViewModel(SnackMachine snackMachine)
     {
         _snackMachine = snackMachine;
+        _repository = new SnackMachineRepository();
         InsertCentCommand = new Command(() => InsertMoney(Money.Cent));
         InsertTenCentCommand = new Command(() => InsertMoney(Money.TenCent));
         InsertQuarterCommand = new Command(() => InsertMoney(Money.Quarter));
@@ -19,11 +24,13 @@ public class SnackMachineViewModel : ViewModel
         InsertFiveEuroCommand = new Command(() => InsertMoney(Money.FiveEuro));
         InsertTwentyEuroCommand = new Command(() => InsertMoney(Money.TwentyEuro));
         ReturnMoneyCommand = new Command(() => ReturnMoney());
-        BuySnackCommand = new Command(() => BuySnack());
+        BuySnackCommand = new Command<string>(BuySnack);
     }
 
-    public Command BuySnackCommand { get; private set; }
+    public Command<string> BuySnackCommand { get; private set; }
+
     public override string Caption => "Snack Machine";
+
     public Command InsertCentCommand { get; private set; }
 
     public Command InsertEuroCommand { get; private set; }
@@ -50,18 +57,35 @@ public class SnackMachineViewModel : ViewModel
     }
 
     public Money MoneyInside => _snackMachine.MoneyInside;
+
     public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
+
+    public IReadOnlyCollection<SnackPileViewModel> Piles
+    {
+        get
+        {
+            return _snackMachine.GetAllSnackPiles()
+                .Select(x => new SnackPileViewModel(x))
+                .ToList();
+        }
+    }
+
     public Command ReturnMoneyCommand { get; private set; }
 
-    public void BuySnack()
+    public void BuySnack(string position)
     {
-        _snackMachine.BuySnack(1);
-        using (var session = SessionFactory.OpenSession())
-        using (var transaction = session.BeginTransaction())
+        var pos = int.Parse(position);
+
+        var error = _snackMachine.CanBuySnack(pos);
+
+        if (error != String.Empty)
         {
-            session.SaveOrUpdate(_snackMachine);
-            transaction.Commit();
+            NotifyClient(error);
+            return;
         }
+
+        _snackMachine.BuySnack(pos);
+        _repository.Save(_snackMachine);
         NotifyClient("You have bought a snack");
     }
 
@@ -84,5 +108,6 @@ public class SnackMachineViewModel : ViewModel
         Message = message;
         Notify(nameof(MoneyInTransaction));
         Notify(nameof(MoneyInside));
+        Notify(nameof(Piles));
     }
 }

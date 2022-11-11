@@ -14,7 +14,7 @@ public class SnackMachineTests
         var snackMachine = new SnackMachine();
 
         snackMachine
-            .LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 0.5m));
+            .LoadSnacks(1, new SnackPile(Snack.Chocolate, 1, 0.5m));
 
         snackMachine
             .LoadMoney(Money.TenCent * 10);
@@ -46,7 +46,7 @@ public class SnackMachineTests
         var snackMachine = new SnackMachine();
 
         snackMachine
-            .LoadSnacks(position: 1, snackPile: new SnackPile(new Snack("Some Snack"), 10, 1m));
+            .LoadSnacks(position: 1, snackPile: new SnackPile(Snack.Chocolate, 10, 1m));
 
         snackMachine.InsertMoney(Money.Euro);
 
@@ -79,7 +79,7 @@ public class SnackMachineTests
         // Arrange
         var snackMachine = new SnackMachine();
 
-        snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 0.5m));
+        snackMachine.LoadSnacks(1, new SnackPile(Snack.Chocolate, 1, 0.5m));
 
         snackMachine.InsertMoney(Money.Euro);
 
@@ -129,7 +129,7 @@ public class SnackMachineTests
         var snackMachine = new SnackMachine();
 
         snackMachine
-            .LoadSnacks(position: 1, snackPile: new SnackPile(new Snack("Some Snack"), 1, 2m));
+            .LoadSnacks(position: 1, snackPile: new SnackPile(Snack.Chocolate, 1, 2m));
 
         snackMachine.InsertMoney(Money.Euro);
 

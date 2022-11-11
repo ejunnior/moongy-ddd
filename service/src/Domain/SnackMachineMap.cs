@@ -1,5 +1,6 @@
 ﻿namespace Domain;
 
+using FluentNHibernate;
 using FluentNHibernate.Mapping;
 
 public class SnackMachineMap : ClassMap<SnackMachine>
@@ -17,5 +18,11 @@ public class SnackMachineMap : ClassMap<SnackMachine>
             y.Map(x => x.FiveEuroCount);
             y.Map(x => x.TwentyEuroCount);
         });
+
+        HasMany<Slot>(Reveal.Member<SnackMachine>("Slots"))
+            .Cascade
+            .SaveUpdate()
+            .Not
+            .LazyLoad();
     }
 }

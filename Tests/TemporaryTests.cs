@@ -10,8 +10,7 @@ public class TemporaryTests
     {
         SessionFactory.Init(@"Server=(local);Database=Ddd;Trusted_Connection=true");
 
-        var session = SessionFactory.OpenSession();
-
-        var snackMachine = session.Get<SnackMachine>(1L);
+        var repository = new SnackMachineRepository();
+        var snackMachine = repository.GetById(1);
     }
 }

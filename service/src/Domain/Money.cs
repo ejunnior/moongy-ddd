@@ -93,6 +93,14 @@ public class Money : ValueObject<Money>
 
     public Money Allocate(decimal amount)
     {
+        if (!CanAllocate(amount))
+            throw new InvalidOperationException();
+
+        return AllocateCore(amount);
+    }
+
+    public Money AllocateCore(decimal amount)
+    {
         int twentyEuroCount = Math.Min((int)(amount / 20), TwentyEuroCount);
         amount = amount - twentyEuroCount * 20;
 
@@ -118,6 +126,12 @@ public class Money : ValueObject<Money>
             oneEuroCount: oneEuroCount,
             fiveEuroCount: fiveEuroCount,
             twentyEuroCount: twentyEuroCount);
+    }
+
+    public bool CanAllocate(decimal amount)
+    {
+        var money = AllocateCore(amount);
+        return money.Amount == amount;
     }
 
     public override string ToString()
