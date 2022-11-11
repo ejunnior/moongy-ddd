@@ -49,7 +49,7 @@ public class SnackMachineViewModel : ViewModel
         }
     }
 
-    public Money MoneyInside => _snackMachine.MoneyInside + _snackMachine.MoneyInTransaction;
+    public Money MoneyInside => _snackMachine.MoneyInside;
     public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
     public Command ReturnMoneyCommand { get; private set; }
 

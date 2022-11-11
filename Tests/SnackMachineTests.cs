@@ -8,6 +8,38 @@ using Xunit;
 public class SnackMachineTests
 {
     [Fact]
+    public void After_Purchase_Change_Is_Returned()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        snackMachine
+            .LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 0.5m));
+
+        snackMachine
+            .LoadMoney(Money.TenCent * 10);
+
+        snackMachine
+            .InsertMoney(Money.Euro);
+
+        // Act
+        snackMachine
+            .BuySnack(1);
+
+        // Assert
+        snackMachine
+            .MoneyInside
+            .Amount
+            .Should()
+            .Be(1.5m);
+
+        snackMachine
+            .MoneyInTransaction
+            .Should()
+            .Be(0m);
+    }
+
+    [Fact]
     public void Buysnack_trades_inserted_money_for_a_snack()
     {
         // Arrange
@@ -26,7 +58,7 @@ public class SnackMachineTests
         snackMachine
             .MoneyInTransaction
             .Should()
-            .Be(Money.None);
+            .Be(0);
 
         snackMachine
             .MoneyInside
@@ -42,6 +74,25 @@ public class SnackMachineTests
     }
 
     [Fact]
+    public void Cannot_Buy_Snack_If_Not_Enough_Change()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 0.5m));
+
+        snackMachine.InsertMoney(Money.Euro);
+
+        // Act
+        var action = () => snackMachine.BuySnack(1);
+
+        // Assert
+        action
+            .Should()
+            .Throw<InvalidOperationException>();
+    }
+
+    [Fact]
     public void Cannot_insert_more_than_one_coin_or_note_at_a_time()
     {
         var machine = new SnackMachine();
@@ -50,6 +101,43 @@ public class SnackMachineTests
         var action = () => machine
             .InsertMoney(twoCent);
 
+        action
+            .Should()
+            .Throw<InvalidOperationException>();
+    }
+
+    [Fact]
+    public void Cannot_Make_Purchase_When_There_Is_No_Snack()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        // Act
+        var action = () => snackMachine
+            .BuySnack(1);
+
+        // Assert
+        action
+            .Should()
+            .Throw<InvalidOperationException>();
+    }
+
+    [Fact]
+    public void Cannot_Make_Purshase_If_Not_Enough_Money_Inserted()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        snackMachine
+            .LoadSnacks(position: 1, snackPile: new SnackPile(new Snack("Some Snack"), 1, 2m));
+
+        snackMachine.InsertMoney(Money.Euro);
+
+        // Action
+        var action = () => snackMachine
+            .BuySnack(1);
+
+        // Assert
         action
             .Should()
             .Throw<InvalidOperationException>();
@@ -68,7 +156,6 @@ public class SnackMachineTests
         // Assert
         snackMachine
             .MoneyInTransaction
-            .Amount
             .Should()
             .Be(1.01m);
     }
@@ -89,8 +176,36 @@ public class SnackMachineTests
         // Assert
         snackMachine
             .MoneyInTransaction
-            .Amount
             .Should()
             .Be(0m);
+    }
+
+    [Fact]
+    public void Snack_Machine_Returns_Money_With_Highest_Denomination_First()
+    {
+        // Arrange
+        var snackMachine = new SnackMachine();
+
+        snackMachine.LoadMoney(Money.Euro);
+        snackMachine.InsertMoney(Money.Quarter);
+        snackMachine.InsertMoney(Money.Quarter);
+        snackMachine.InsertMoney(Money.Quarter);
+        snackMachine.InsertMoney(Money.Quarter);
+
+        // Act
+        snackMachine.ReturnMoney();
+
+        // Assert
+        snackMachine
+            .MoneyInside
+            .QuarterCount
+            .Should()
+            .Be(4);
+
+        snackMachine
+            .MoneyInside
+            .OneEuroCount
+            .Should()
+            .Be(0);
     }
 }

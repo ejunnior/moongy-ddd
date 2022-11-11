@@ -69,6 +69,17 @@ public class Money : ValueObject<Money>
             twentyEuroCount: money1.TwentyEuroCount - money2.TwentyEuroCount);
     }
 
+    public static Money operator *(Money money1, int multiplier)
+    {
+        return new Money(
+            oneCentCount: money1.OneCentCount * multiplier,
+            tenCentCount: money1.TenCentCount * multiplier,
+            quarterCount: money1.QuarterCount * multiplier,
+            oneEuroCount: money1.OneEuroCount * multiplier,
+            fiveEuroCount: money1.FiveEuroCount * multiplier,
+            twentyEuroCount: money1.TwentyEuroCount * multiplier);
+    }
+
     public static Money operator +(Money money1, Money money2)
     {
         return new Money(
@@ -78,6 +89,35 @@ public class Money : ValueObject<Money>
             oneEuroCount: money1.OneEuroCount + money2.OneEuroCount,
             fiveEuroCount: money1.FiveEuroCount + money2.FiveEuroCount,
             twentyEuroCount: money1.TwentyEuroCount + money2.TwentyEuroCount);
+    }
+
+    public Money Allocate(decimal amount)
+    {
+        int twentyEuroCount = Math.Min((int)(amount / 20), TwentyEuroCount);
+        amount = amount - twentyEuroCount * 20;
+
+        int fiveEuroCount = Math.Min((int)(amount / 5), FiveEuroCount);
+        amount = amount - fiveEuroCount * 5;
+
+        int oneEuroCount = Math.Min((int)amount, OneEuroCount);
+        amount = amount - oneEuroCount;
+
+        int quarterCount = Math.Min((int)(amount / 0.25m), QuarterCount);
+        amount = amount - quarterCount * 0.25m;
+
+        int tenCentCount = Math.Min((int)(amount / 0.1m), TenCentCount);
+        amount = amount - tenCentCount * 0.1m;
+
+        int oneCentCount = Math.Min((int)(amount / 0.01m), OneCentCount);
+        amount = amount - oneCentCount * 0.01m;
+
+        return new Money(
+            oneCentCount: oneCentCount,
+            tenCentCount: tenCentCount,
+            quarterCount: quarterCount,
+            oneEuroCount: oneEuroCount,
+            fiveEuroCount: fiveEuroCount,
+            twentyEuroCount: twentyEuroCount);
     }
 
     public override string ToString()

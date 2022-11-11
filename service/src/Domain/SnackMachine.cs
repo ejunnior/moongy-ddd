@@ -5,7 +5,7 @@ public class SnackMachine : AggregateRoot
     public SnackMachine()
     {
         MoneyInside = Money.None;
-        MoneyInTransaction = Money.None;
+        MoneyInTransaction = 0;
 
         Slots = new List<Slot>
         {
@@ -17,17 +17,26 @@ public class SnackMachine : AggregateRoot
 
     public Money MoneyInside { get; private set; }
 
-    public Money MoneyInTransaction { get; private set; }
+    public decimal MoneyInTransaction { get; private set; }
 
     private IList<Slot> Slots { get; set; }
 
     public void BuySnack(int position)
     {
         var slot = GetSlot(position);
+
+        if (slot.SnackPile.Price > MoneyInTransaction)
+            throw new InvalidOperationException();
+
         slot.SnackPile = slot.SnackPile.SubtractOne();
 
-        MoneyInside += MoneyInTransaction;
-        MoneyInTransaction = Money.None;
+        var change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
+
+        if (change.Amount < MoneyInTransaction - slot.SnackPile.Price)
+            throw new InvalidOperationException();
+
+        MoneyInside -= change;
+        MoneyInTransaction = 0;
     }
 
     public SnackPile GetSnackPile(int position)
@@ -50,7 +59,13 @@ public class SnackMachine : AggregateRoot
         if (!coinsAndNotes.Contains(money))
             throw new InvalidOperationException();
 
-        MoneyInTransaction += money;
+        MoneyInTransaction += money.Amount;
+        MoneyInside += money;
+    }
+
+    public void LoadMoney(Money money)
+    {
+        MoneyInside += money;
     }
 
     public void LoadSnacks(int position, SnackPile snackPile)
@@ -61,7 +76,9 @@ public class SnackMachine : AggregateRoot
 
     public void ReturnMoney()
     {
-        MoneyInTransaction = Money.None;
+        var moneyToReturn = MoneyInside.Allocate(MoneyInTransaction);
+        MoneyInside -= moneyToReturn;
+        MoneyInTransaction = 0;
     }
 
     private Slot GetSlot(int position)
