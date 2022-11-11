@@ -4,16 +4,11 @@ public class Slot : Entity
 {
     public Slot(
         SnackMachine snackMachine,
-        int position,
-        Snack snack,
-        int quantity,
-        decimal price)
+        int position) : this()
     {
-        Position = position;
-        Price = price;
-        Quantity = quantity;
-        Snack = snack;
         SnackMachine = snackMachine;
+        Position = position;
+        SnackPile = new SnackPile(null, 0, 0m);
     }
 
     private Slot()
@@ -21,8 +16,6 @@ public class Slot : Entity
     }
 
     public int Position { get; }
-    public decimal Price { get; set; }
-    public int Quantity { get; set; }
-    public Snack Snack { get; set; }
     public SnackMachine SnackMachine { get; }
+    public SnackPile SnackPile { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Domain;
 
-public class Snack : Entity
+public class Snack : AggregateRoot
 {
     public Snack(string name)
     {
