@@ -1,6 +1,6 @@
 ﻿namespace Domain;
 
-public class SnackMachine : Entity
+public class SnackMachine : AggregateRoot
 {
     public SnackMachine()
     {
@@ -9,24 +9,29 @@ public class SnackMachine : Entity
 
         Slots = new List<Slot>
         {
-            new Slot(snackMachine: this,position:1,snack:null,quantity:0,price:0m),
-            new Slot(snackMachine: this,position:2,snack:null,quantity:0,price:0m),
-            new Slot(snackMachine: this,position:3,snack:null,quantity:0,price:0m)
+            new Slot(snackMachine: this,position:1),
+            new Slot(snackMachine: this,position:2),
+            new Slot(snackMachine: this,position:3)
         };
     }
 
     public Money MoneyInside { get; private set; }
     public Money MoneyInTransaction { get; private set; }
 
-    public IList<Slot> Slots { get; set; }
+    private IList<Slot> Slots { get; set; }
 
     public void BuySnack(int position)
     {
-        var slot = Slots.Single(x => x.Position == position);
-        slot.Quantity -= 1;
+        var slot = GetSlot(position);
+        slot.SnackPile = slot.SnackPile.SubtractOne();
 
         MoneyInside += MoneyInTransaction;
         MoneyInTransaction = Money.None;
+    }
+
+    public SnackPile GetSnackPile(int position)
+    {
+        return GetSlot(position).SnackPile;
     }
 
     public void InsertMoney(Money money)
@@ -49,18 +54,20 @@ public class SnackMachine : Entity
 
     public void LoadSnacks(
         int position,
-        Snack snack,
-        int quantity,
-        decimal price)
+        SnackPile snackPile)
     {
-        var slot = Slots.Single(x => x.Position == position);
-        slot.Snack = snack;
-        slot.Quantity = quantity;
-        slot.Price = price;
+        var slot = GetSlot(position);
+        slot.SnackPile = snackPile;
     }
 
     public void ReturnMoney()
     {
         MoneyInTransaction = Money.None;
+    }
+
+    private Slot GetSlot(int position)
+    {
+        return Slots
+            .Single(x => x.Position == position);
     }
 }

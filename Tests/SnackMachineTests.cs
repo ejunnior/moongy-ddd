@@ -15,9 +15,7 @@ public class SnackMachineTests
 
         snackMachine.LoadSnacks(
             position: 1,
-            snack: new Snack("Some Snack"),
-            quantity: 10,
-            price: 1m);
+            new SnackPile(new Snack("Some Snack"), 10, 1m));
 
         snackMachine.InsertMoney(Money.Euro);
 
@@ -38,8 +36,7 @@ public class SnackMachineTests
             .Be(1m);
 
         snackMachine
-            .Slots
-            .Single(x => x.Position == 1)
+            .GetSnackPile(1)
             .Quantity
             .Should()
             .Be(9);
