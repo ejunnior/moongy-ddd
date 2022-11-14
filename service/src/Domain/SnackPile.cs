@@ -2,6 +2,8 @@
 
 public class SnackPile : ValueObject<SnackPile>
 {
+    public static readonly SnackPile Empty = new SnackPile(Snack.None, 0, 0m);
+
     public SnackPile(
         Snack snack,
         int quantity,
