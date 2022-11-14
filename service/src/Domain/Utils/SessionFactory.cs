@@ -8,6 +8,7 @@ using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Helpers;
 using FluentNHibernate.Conventions.Instances;
 using NHibernate;
+using NHibernate.Event;
 
 public static class SessionFactory
 {
@@ -37,6 +38,17 @@ public static class SessionFactory
                             x => x.Not.Nullable()))
                 .Conventions.Add<TableNameConvention>()
                 .Conventions.Add<HiLoConvention>())
+            .ExposeConfiguration(x =>
+            {
+                x.EventListeners.PostCommitDeleteEventListeners =
+                    new IPostDeleteEventListener[] { new EventListener() };
+                x.EventListeners.PostCommitInsertEventListeners =
+                    new IPostInsertEventListener[] { new EventListener() };
+                x.EventListeners.PostCommitUpdateEventListeners =
+                    new IPostUpdateEventListener[] { new EventListener() };
+                x.EventListeners.PostCollectionUpdateEventListeners =
+                    new IPostCollectionUpdateEventListener[] { new EventListener() };
+            })
             .BuildSessionFactory();
     }
 

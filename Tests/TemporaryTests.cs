@@ -1,6 +1,7 @@
 ﻿namespace Tests;
 
 using Domain;
+using Domain.Management;
 using Domain.SnackMachines;
 using Domain.Utils;
 using Xunit;
@@ -14,5 +15,8 @@ public class TemporaryTests
 
         var repository = new SnackMachineRepository();
         var snackMachine = repository.GetById(1);
+
+        HeadOfficeInstance.Init();
+        var office = HeadOfficeInstance.Instance;
     }
 }

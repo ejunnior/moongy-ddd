@@ -52,5 +52,7 @@ public class Atm : AggregateRoot
 
         var amountWithComission = CaluculateAmountWithCommission(amount);
         MoneyCharged += amountWithComission;
+
+        AddDomainEvent(new BalanceChangedEvent(amountWithComission));
     }
 }

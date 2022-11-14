@@ -15,7 +15,7 @@ public class MainViewModel : ViewModel
         //_dialogService.ShowDialog(viewModel);
 
         var atm = new AtmRepository().GetById(1);
-        var viewModel = new AtmViewModel(atm);
+        var viewModel = new AtmViewModel(atm, new PaymentGateway());
         _dialogService.ShowDialog(viewModel);
     }
 }
