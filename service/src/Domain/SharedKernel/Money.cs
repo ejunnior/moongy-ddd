@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿namespace Domain.SharedKernel;
+
+using Common;
 
 public class Money : ValueObject<Money>
 {

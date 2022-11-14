@@ -1,9 +1,9 @@
-﻿namespace UI;
+﻿namespace UI.SnackMachines;
 
 using System;
 using System.Windows;
 using System.Windows.Media;
-using Domain;
+using Domain.SnackMachines;
 
 public class SnackPileViewModel
 {

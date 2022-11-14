@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿namespace Domain.Common;
+
+using Utils;
 
 public class Repository<T>
     where T : AggregateRoot

@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace Domain.Common;
 
 public abstract class ValueObject<T>
     where T : class

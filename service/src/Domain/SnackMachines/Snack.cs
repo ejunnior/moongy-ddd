@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿namespace Domain.SnackMachines;
+
+using Common;
 
 public class Snack : AggregateRoot
 {

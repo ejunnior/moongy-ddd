@@ -1,6 +1,8 @@
 ﻿namespace Tests;
 
 using Domain;
+using Domain.SnackMachines;
+using Domain.Utils;
 using Xunit;
 
 public class TemporaryTests

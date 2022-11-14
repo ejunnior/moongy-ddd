@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace Domain.Utils;
 
 using System.Reflection;
 using FluentNHibernate.Cfg;

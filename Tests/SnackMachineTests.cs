@@ -2,6 +2,8 @@
 
 using System.ComponentModel.DataAnnotations;
 using Domain;
+using Domain.SharedKernel;
+using Domain.SnackMachines;
 using FluentAssertions;
 using Xunit;
 

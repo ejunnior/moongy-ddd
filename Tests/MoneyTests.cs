@@ -1,6 +1,7 @@
 ﻿namespace Tests
 {
     using Domain;
+    using Domain.SharedKernel;
     using FluentAssertions;
     using Xunit;
 

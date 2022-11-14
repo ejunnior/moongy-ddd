@@ -1,6 +1,4 @@
-﻿namespace UI;
-
-using Domain;
+﻿namespace Domain.Utils;
 
 public static class Initer
 {

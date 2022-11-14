@@ -1,10 +1,11 @@
-﻿namespace UI;
+﻿namespace UI.SnackMachines;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common;
-using Domain;
+using Domain.SharedKernel;
+using Domain.SnackMachines;
+using UI.Common;
 
 public class SnackMachineViewModel : ViewModel
 {

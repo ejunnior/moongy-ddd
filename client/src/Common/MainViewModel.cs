@@ -1,6 +1,8 @@
 ﻿namespace UI.Common;
 
 using Domain;
+using Domain.SnackMachines;
+using SnackMachines;
 
 public class MainViewModel : ViewModel
 {
