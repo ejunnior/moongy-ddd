@@ -14,9 +14,9 @@ CREATE TABLE [dbo].[Atm](
 	[OneCentCount] [int] NOT NULL,
 	[TenCentCount] [int] NOT NULL,
 	[QuarterCount] [int] NOT NULL,
-	[OneDollarCount] [int] NOT NULL,
-	[FiveDollarCount] [int] NOT NULL,
-	[TwentyDollarCount] [int] NOT NULL,
+	[OneEuroCount] [int] NOT NULL,
+	[FiveEuroCount] [int] NOT NULL,
+	[TwentyEuroCount] [int] NOT NULL,
  CONSTRAINT [PK_Atm] PRIMARY KEY CLUSTERED 
 (
 	[AtmID] ASC
@@ -34,9 +34,9 @@ CREATE TABLE [dbo].[HeadOffice](
 	[OneCentCount] [int] NOT NULL,
 	[TenCentCount] [int] NOT NULL,
 	[QuarterCount] [int] NOT NULL,
-	[OneDollarCount] [int] NOT NULL,
-	[FiveDollarCount] [int] NOT NULL,
-	[TwentyDollarCount] [int] NOT NULL,
+	[OneEuroCount] [int] NOT NULL,
+	[FiveEuroCount] [int] NOT NULL,
+	[TwentyEuroCount] [int] NOT NULL,
  CONSTRAINT [PK_HeadOffice] PRIMARY KEY CLUSTERED 
 (
 	[HeadOfficeID] ASC
@@ -100,9 +100,9 @@ CREATE TABLE [dbo].[SnackMachine](
 	[OneCentCount] [int] NOT NULL,
 	[TenCentCount] [int] NOT NULL,
 	[QuarterCount] [int] NOT NULL,
-	[OneDollarCount] [int] NOT NULL,
-	[FiveDollarCount] [int] NOT NULL,
-	[TwentyDollarCount] [int] NOT NULL,
+	[OneEuroCount] [int] NOT NULL,
+	[FiveEuroCount] [int] NOT NULL,
+	[TwentyEuroCount] [int] NOT NULL,
  CONSTRAINT [PK_SnackMachine] PRIMARY KEY CLUSTERED 
 (
 	[SnackMachineID] ASC
@@ -110,9 +110,9 @@ CREATE TABLE [dbo].[SnackMachine](
 ) ON [PRIMARY]
 
 GO
-INSERT [dbo].[Atm] ([AtmID], [MoneyCharged], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, CAST(0 AS Decimal(18, 2)), 20, 20, 20, 20,20, 20)
+INSERT [dbo].[Atm] ([AtmID], [MoneyCharged], [OneCentCount], [TenCentCount], [QuarterCount], [OneEuroCount], [FiveEuroCount], [TwentyEuroCount]) VALUES (1, CAST(0 AS Decimal(18, 2)), 20, 20, 20, 20,20, 20)
 GO
-INSERT [dbo].[HeadOffice] ([HeadOfficeID], [Balance], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, CAST(0 AS Decimal(18, 2)), 0, 0, 0, 0, 0, 0)
+INSERT [dbo].[HeadOffice] ([HeadOfficeID], [Balance], [OneCentCount], [TenCentCount], [QuarterCount], [OneEuroCount], [FiveEuroCount], [TwentyEuroCount]) VALUES (1, CAST(0 AS Decimal(18, 2)), 0, 0, 0, 0, 0, 0)
 GO
 INSERT [dbo].[Ids] ([EntityName], [NextHigh]) VALUES (N'Atm', 1)
 GO
@@ -137,7 +137,7 @@ GO
 INSERT [dbo].[Snack] ([SnackID], [Name]) VALUES (3, N'Gum')
 
 GO
-INSERT [dbo].[SnackMachine] ([SnackMachineID], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, 10, 10, 10, 10, 10, 10)
+INSERT [dbo].[SnackMachine] ([SnackMachineID], [OneCentCount], [TenCentCount], [QuarterCount], [OneEuroCount], [FiveEuroCount], [TwentyEuroCount]) VALUES (1, 10, 10, 10, 10, 10, 10)
 GO
 ALTER TABLE [dbo].[Slot] ADD  CONSTRAINT [DF_Slot_Position]  DEFAULT ((1)) FOR [Position]
 GO
