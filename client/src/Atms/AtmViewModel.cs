@@ -11,11 +11,9 @@
         private readonly AtmRepository _repository;
         private string _message;
 
-        public AtmViewModel(
-            Atm atm,
-            PaymentGateway paymentGateway)
+        public AtmViewModel(Atm atm)
         {
-            _paymentGateway = paymentGateway;
+            _paymentGateway = new PaymentGateway();
             _atm = atm;
             _repository = new AtmRepository();
 
