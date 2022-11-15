@@ -7,6 +7,8 @@ public class BalanceChangedEventHandler : IHandler<BalanceChangedEvent>
 {
     public void Handle(BalanceChangedEvent domainEvent)
     {
+        //Service Bus
+
         var repository = new HeadOfficeRepository();
         var headOffice = HeadOfficeInstance.Instance;
         headOffice.ChangeBalance(domainEvent.Delta);
