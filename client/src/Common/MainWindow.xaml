@@ -6,13 +6,13 @@
         Title="Domain Driven Design" Height="450" Width="800"
         Icon="{StaticResource imgApplicationIcon}">
     <Grid>
-        <ContentPresenter Content="{Binding Path=SnackMachine}" ContentTemplate="{StaticResource SnackMachineViewModel}" RenderTransformOrigin="0.5,0.5" >
+        <ContentPresenter Content="{Binding Path=Dashboard}" ContentTemplate="{StaticResource DashboardViewModel}" RenderTransformOrigin="0.5,0.5">
             <ContentPresenter.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.05"/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="-0.05" />
+                    <TranslateTransform />
                 </TransformGroup>
             </ContentPresenter.RenderTransform>
         </ContentPresenter>

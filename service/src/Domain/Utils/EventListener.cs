@@ -63,6 +63,9 @@ public class EventListener :
 
     private void DispatchEvents(AggregateRoot aggregateRoot)
     {
+        if (aggregateRoot == null)
+            return;
+
         foreach (var @event in aggregateRoot.DomainEvents)
         {
             DomainEvents.Dispatch(@event);

@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Atms\" />
     <Folder Include="Management\" />
   </ItemGroup>
 
